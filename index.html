@@ -164,6 +164,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/22/js_browser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/22/js_browser/" class="post-title-link" itemprop="url">Javascript Browser 控制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-22 01:24:16" itemprop="dateCreated datePublished" datetime="2023-03-22T01:24:16+09:00">2023-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-26 02:24:03" itemprop="dateModified" datetime="2023-03-26T02:24:03+09:00">2023-03-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="获取选项卡的-ID"><a href="#获取选项卡的-ID" class="headerlink" title="获取选项卡的 ID"></a>获取选项卡的 ID</h2><h4 id="在-Chrome-中，可以使用-chrome-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID："><a href="#在-Chrome-中，可以使用-chrome-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID：" class="headerlink" title="在 Chrome 中，可以使用 chrome.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID："></a>在 Chrome 中，可以使用 chrome.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chrome.tabs.query(&#123; active: true, currentWindow: true &#125;, function(tabs) &#123;</span><br><span class="line">  var tabId = tabs[0].id;</span><br><span class="line">  console.log(&quot;当前选项卡的ID是：&quot; + tabId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="在-Firefox-中，可以使用-browser-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID"><a href="#在-Firefox-中，可以使用-browser-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID" class="headerlink" title="在 Firefox 中，可以使用 browser.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID:"></a>在 Firefox 中，可以使用 browser.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">browser.tabs.query(&#123; active: true, currentWindow: true &#125;).then(function(tabs) &#123;</span><br><span class="line">  var tabId = tabs[0].id;</span><br><span class="line">  console.log(&quot;当前选项卡的ID是：&quot; + tabId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/20/git_comm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/20/git_comm/" class="post-title-link" itemprop="url">使用 git</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-20 01:35:16" itemprop="dateCreated datePublished" datetime="2023-03-20T01:35:16+09:00">2023-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-27 00:12:49" itemprop="dateModified" datetime="2023-03-27T00:12:49+09:00">2023-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><h2 id="查看-git-版本"><a href="#查看-git-版本" class="headerlink" title="查看 git 版本"></a>查看 git 版本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git --version</span><br><span class="line">git version 2.21.0.windows.1</span><br></pre></td></tr></table></figure>
+<h2 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h2><p>Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。<br>这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：</p>
+<ul>
+<li>&#x2F;etc&#x2F;gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 git config 时用 –system 选项，读写的就是这个文件。</li>
+<li>~&#x2F;.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 git config 时用 –global 选项，读写的就是这个文件。</li>
+<li>当前项目的 Git 目录中的配置文件（也就是工作目录中的 .git&#x2F;config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git&#x2F;config 里的配置会覆盖 &#x2F;etc&#x2F;gitconfig 中的同名变量。</li>
+</ul>
+<p>在 Windows 系统上，Git 会找寻用户主目录下的 .gitconfig 文件。主目录即 $HOME 变量指定的目录，一般都是 C:\Documents and Settings$USER。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git config --global user.name &quot;runoob&quot;</span><br><span class="line">cmd&gt; git config --global user.email test@runoob.com</span><br></pre></td></tr></table></figure>
+<p>.gitconfig 文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">	helper = wincred</span><br><span class="line">[user]</span><br><span class="line">	name = test</span><br><span class="line">	email = test@aaaa.com</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git config --list</span><br><span class="line">core.symlinks=false</span><br><span class="line">core.autocrlf=true</span><br><span class="line">core.fscache=true</span><br><span class="line">color.diff=auto</span><br><span class="line">color.status=auto</span><br><span class="line">color.branch=auto</span><br><span class="line">color.interactive=true</span><br><span class="line">help.format=html</span><br><span class="line">rebase.autosquash=true</span><br><span class="line">http.sslbackend=openssl</span><br><span class="line">http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt</span><br><span class="line">credential.helper=manager</span><br><span class="line">credential.helper=wincred</span><br><span class="line">user.name=test</span><br><span class="line">user.email=test@aaaa.com</span><br></pre></td></tr></table></figure>
+<h2 id="Git-命令"><a href="#Git-命令" class="headerlink" title="Git 命令"></a>Git 命令</h2><p>将github上的库，下载到本地工作目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\gitworksp&gt;git clone https://YourToken@github.com/XXXXXX/testdoc.git</span><br></pre></td></tr></table></figure>
+<p>git init - 初始化仓库。<br>git add . - 添加文件到暂存区。<br>git commit - 将暂存区内容添加到仓库中。</p>
+<h2 id="Git-命令-HELP"><a href="#Git-命令-HELP" class="headerlink" title="Git 命令 HELP"></a>Git 命令 HELP</h2><p>安装完git后本地有HELP文档<br>file:&#x2F;&#x2F;&#x2F;C:&#x2F;Program%20Files&#x2F;Git&#x2F;mingw64&#x2F;share&#x2F;doc&#x2F;git-doc&#x2F;</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/html_comm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -420,7 +584,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-21 02:15:27" itemprop="dateModified" datetime="2023-03-21T02:15:27+09:00">2023-03-21</time>
+                <time title="Modified: 2023-03-22 03:02:05" itemprop="dateModified" datetime="2023-03-22T03:02:05+09:00">2023-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +656,7 @@
 <h2 id="部署-Deploy"><a href="#部署-Deploy" class="headerlink" title="部署 Deploy"></a>部署 Deploy</h2><ol>
 <li>安装 一键部署<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">※ 参考 https://github.com/hexojs/hexo-deployer-git</span><br></pre></td></tr></table></figure></li>
 <li>修改配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: https://YourToken@github.com/YourName/testhexo.git</span><br></pre></td></tr></table></figure></li>
-<li>部署<br>Hexo d</li>
+<li>部署<br>Hexo d<br>在轻量应用服务器部署Hexo博客<br><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/815625">https://developer.aliyun.com/article/815625</a><br>把Hexo部署到云服务器<br><a target="_blank" rel="noopener" href="https://www.drflower.top/posts/963961c3/">https://www.drflower.top/posts/963961c3/</a><br>Kubernetes（K8S）是什么?<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Can-daydayup/p/16706198.html">https://www.cnblogs.com/Can-daydayup/p/16706198.html</a><br>将hexo个人博客部署到个人云服务器–最详细踩坑教程<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/120743882">https://zhuanlan.zhihu.com/p/120743882</a><br>Xserverへgitの最新版をインストールする<br><a target="_blank" rel="noopener" href="https://qiita.com/y-ngi/items/7a170a19d809d2f49a15">https://qiita.com/y-ngi/items/7a170a19d809d2f49a15</a></li>
 </ol>
 
       
@@ -575,20 +739,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="关于 HexoHexo 是一款快速、简洁且高效的博客框架，拥有超快生成速度，支持 Markdown，一键部署和高度可扩展性。 环境安装使用 Hexo 需要 nodejs + git  安装 nodejs下载参照 Node js 官网 安装 git下载参照 git-scm.com  检测环境 nodejs12cmd&gt; node -vv14.17.1 git12cmd&gt; git --ver">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-09T11:42:59.000Z">
-<meta property="article:modified_time" content="2023-03-21T18:02:05.694Z">
+<meta property="article:modified_time" content="2023-04-16T18:19:57.956Z">
 <meta property="article:author" content="Kevin@TK">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Nodejs">
@@ -141,6 +141,16 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+        <li class="menu-item menu-item-electric">
+
+    <a href="/electric2/" rel="section"><i class="fa fa-plug fa-fw"></i>electric</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/about/" rel="section"><i class="fa fa-globe fa-fw"></i>link</a>
+
+  </li>
   </ul>
 </nav>
 
@@ -199,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-22 03:02:05" itemprop="dateModified" datetime="2023-03-22T03:02:05+09:00">2023-03-22</time>
+                <time title="Modified: 2023-04-17 03:19:57" itemprop="dateModified" datetime="2023-04-17T03:19:57+09:00">2023-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,6 +283,44 @@
 <li>修改配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: https://YourToken@github.com/YourName/testhexo.git</span><br></pre></td></tr></table></figure></li>
 <li>部署<br>Hexo d<br>在轻量应用服务器部署Hexo博客<br><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/815625">https://developer.aliyun.com/article/815625</a><br>把Hexo部署到云服务器<br><a target="_blank" rel="noopener" href="https://www.drflower.top/posts/963961c3/">https://www.drflower.top/posts/963961c3/</a><br>Kubernetes（K8S）是什么?<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Can-daydayup/p/16706198.html">https://www.cnblogs.com/Can-daydayup/p/16706198.html</a><br>将hexo个人博客部署到个人云服务器–最详细踩坑教程<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/120743882">https://zhuanlan.zhihu.com/p/120743882</a><br>Xserverへgitの最新版をインストールする<br><a target="_blank" rel="noopener" href="https://qiita.com/y-ngi/items/7a170a19d809d2f49a15">https://qiita.com/y-ngi/items/7a170a19d809d2f49a15</a></li>
 </ol>
+<h2 id="Hexo-Admin"><a href="#Hexo-Admin" class="headerlink" title="Hexo Admin"></a>Hexo Admin</h2><ol>
+<li>安装 hexo-admin 插件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-admin --save</span><br><span class="line"></span><br><span class="line"># 卸载</span><br><span class="line">npm uninstall hexo-admin --save</span><br></pre></td></tr></table></figure>
+在使用 npm 安装模块时，可以在 npm install 命令后加上 –save 或 –save-dev 参数，来将模块添加到项目的 package.json 文件中的 dependencies 或 devDependencies 字段。</li>
+</ol>
+<p>–save 参数表示将模块添加到 dependencies 字段中，这意味着该模块是项目的必要依赖项，并且会在项目部署时被安装和使用。</p>
+<ol start="2">
+<li>修改根目录中的 _config.yml 文件<br>启用hexo-admin插件 以下设置在登录进Admin后 可以初始化设置<br>在localhost:4000&#x2F;admin&#x2F;网站中点击右上角的settings，然后点击下面的 Setup authentification here <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">admin:</span><br><span class="line">  username: admin  # 管理员用户名</span><br><span class="line">  password_hash:  # 管理员密码哈希值</span><br><span class="line">  Secret: secret</span><br></pre></td></tr></table></figure></li>
+<li>生成管理员密码的哈希值<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -e &quot;console.log(require(&#x27;bcryptjs&#x27;).hashSync(&#x27;your-password-here&#x27;, 10))&quot;</span><br></pre></td></tr></table></figure>
+3-2. 安装 bcryptjs 模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install bcryptjs --save</span><br><span class="line"></span><br><span class="line">//javascript 生成一个密码的哈希值</span><br><span class="line">const bcrypt = require(&#x27;bcryptjs&#x27;);</span><br><span class="line">const saltRounds = 10;</span><br><span class="line">const plainPassword = &#x27;your-password-here&#x27;;</span><br><span class="line">const hashedPassword = bcrypt.hashSync(plainPassword, saltRounds);</span><br><span class="line">console.log(hashedPassword);</span><br></pre></td></tr></table></figure></li>
+<li>启动Hexo本地服务器<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo server</span><br></pre></td></tr></table></figure></li>
+<li>访问 <a target="_blank" rel="noopener" href="http://localhost:4000/admin/">http://localhost:4000/admin/</a> ，您将看到一个登录页面。输入您在 _config.yml 文件中设置的用户名和密码，即可登录管理界面。</li>
+</ol>
+<h2 id="hexo-blog-encrypt"><a href="#hexo-blog-encrypt" class="headerlink" title="hexo-blog-encrypt"></a>hexo-blog-encrypt</h2><ol>
+<li>安装 hexo-blog-encrypt 插件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-blog-encrypt --save</span><br></pre></td></tr></table></figure></li>
+<li>使用方法 添加以下设置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: Hello World</span><br><span class="line">date: 2016-03-30 21:12:21</span><br><span class="line">password: hello</span><br><span class="line">abstract: Here&#x27;s something encrypted, password is required to continue reading.</span><br><span class="line">message: Hey, password is required here.</span><br><span class="line">wrong_pass_message: Oh, this is an invalid password. Check and try again, please.</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Font-Awesome-图标"><a href="#Font-Awesome-图标" class="headerlink" title="Font Awesome 图标"></a>Font Awesome 图标</h2><h3 id="以下是-Font-Awesome-图标和名字的对应网页："><a href="#以下是-Font-Awesome-图标和名字的对应网页：" class="headerlink" title="以下是 Font Awesome 图标和名字的对应网页："></a>以下是 Font Awesome 图标和名字的对应网页：</h3><ul>
+<li>Home（主页）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/home">https://fontawesome.com/icons/home</a></li>
+<li>User（用户）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/user">https://fontawesome.com/icons/user</a></li>
+<li>Search（搜索）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/search">https://fontawesome.com/icons/search</a></li>
+<li>Envelope（信封）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/envelope">https://fontawesome.com/icons/envelope</a></li>
+<li>Heart（心形）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/heart">https://fontawesome.com/icons/heart</a></li>
+<li>Star（星星）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/star">https://fontawesome.com/icons/star</a></li>
+<li>Check（勾选框）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/check">https://fontawesome.com/icons/check</a></li>
+<li>Times（叉号）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/times">https://fontawesome.com/icons/times</a></li>
+<li>Bars（菜单栏）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/bars">https://fontawesome.com/icons/bars</a></li>
+<li>Comment（评论）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/comment">https://fontawesome.com/icons/comment</a></li>
+<li>Calendar（日历）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/calendar">https://fontawesome.com/icons/calendar</a></li>
+<li>Trash（垃圾桶）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/trash">https://fontawesome.com/icons/trash</a></li>
+<li>Camera（相机）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/camera">https://fontawesome.com/icons/camera</a></li>
+<li>Video（视频）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/video">https://fontawesome.com/icons/video</a></li>
+<li>Music（音乐）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/music">https://fontawesome.com/icons/music</a></li>
+<li>Book（书籍）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/book">https://fontawesome.com/icons/book</a></li>
+<li>File（文件）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/file">https://fontawesome.com/icons/file</a></li>
+<li>Link（链接）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/link">https://fontawesome.com/icons/link</a></li>
+<li>Code（代码）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/code">https://fontawesome.com/icons/code</a></li>
+<li>Github（GitHub）：<a target="_blank" rel="noopener" href="https://fontawesome.com/icons/github">https://fontawesome.com/icons/github</a></li>
+</ul>
 
     </div>
 
@@ -355,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-Hexo"><span class="nav-number">1.</span> <span class="nav-text">关于 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">检测环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BB%BA%E7%AB%8B-Blog"><span class="nav-number">5.</span> <span class="nav-text">初始化建立 Blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Server"><span class="nav-number">6.</span> <span class="nav-text">启动 Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA-Blog-%E9%A1%B5"><span class="nav-number">7.</span> <span class="nav-text">新建 Blog 页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Next-%E4%B8%BB%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">安装 Next 主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-canvas-nest%E5%87%A0%E4%BD%95%E6%9D%A1%E7%BA%B9%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF"><span class="nav-number">9.</span> <span class="nav-text">安装 canvas-nest几何条纹动态背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-TOC-Table-of-Contents"><span class="nav-number">10.</span> <span class="nav-text">开启 TOC (Table of Contents)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-tag-Page"><span class="nav-number">11.</span> <span class="nav-text">建立 tag Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-categories-Page"><span class="nav-number">12.</span> <span class="nav-text">建立 categories Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-categories-index-md"><span class="nav-number">13.</span> <span class="nav-text">修改 categories\index.md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-about-Page"><span class="nav-number">14.</span> <span class="nav-text">建立 about Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-Deploy"><span class="nav-number">15.</span> <span class="nav-text">部署 Deploy</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-Hexo"><span class="nav-number">1.</span> <span class="nav-text">关于 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">检测环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BB%BA%E7%AB%8B-Blog"><span class="nav-number">5.</span> <span class="nav-text">初始化建立 Blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Server"><span class="nav-number">6.</span> <span class="nav-text">启动 Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA-Blog-%E9%A1%B5"><span class="nav-number">7.</span> <span class="nav-text">新建 Blog 页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Next-%E4%B8%BB%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">安装 Next 主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-canvas-nest%E5%87%A0%E4%BD%95%E6%9D%A1%E7%BA%B9%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF"><span class="nav-number">9.</span> <span class="nav-text">安装 canvas-nest几何条纹动态背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-TOC-Table-of-Contents"><span class="nav-number">10.</span> <span class="nav-text">开启 TOC (Table of Contents)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-tag-Page"><span class="nav-number">11.</span> <span class="nav-text">建立 tag Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-categories-Page"><span class="nav-number">12.</span> <span class="nav-text">建立 categories Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-categories-index-md"><span class="nav-number">13.</span> <span class="nav-text">修改 categories\index.md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-about-Page"><span class="nav-number">14.</span> <span class="nav-text">建立 about Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-Deploy"><span class="nav-number">15.</span> <span class="nav-text">部署 Deploy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-Admin"><span class="nav-number">16.</span> <span class="nav-text">Hexo Admin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-blog-encrypt"><span class="nav-number">17.</span> <span class="nav-text">hexo-blog-encrypt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Font-Awesome-%E5%9B%BE%E6%A0%87"><span class="nav-number">18.</span> <span class="nav-text">Font Awesome 图标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E6%98%AF-Font-Awesome-%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E5%AD%97%E7%9A%84%E5%AF%B9%E5%BA%94%E7%BD%91%E9%A1%B5%EF%BC%9A"><span class="nav-number">18.1.</span> <span class="nav-text">以下是 Font Awesome 图标和名字的对应网页：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -369,20 +417,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

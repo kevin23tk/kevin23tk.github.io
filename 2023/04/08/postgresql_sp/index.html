@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="存储过程Sample一个求长方形面积的存储过程 12345678910create or replace function area_of_rectangle(lenth integer,height integer)returns integer as $$declare	area integer :&#x3D; 0;begin	area :&#x3D; lenth * height;	return area;en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PostgreSQL Stored Procedure">
+<meta property="og:url" content="http://example.com/2023/04/08/postgresql_sp/index.html">
+<meta property="og:site_name" content="Blog Night">
+<meta property="og:description" content="存储过程Sample一个求长方形面积的存储过程 12345678910create or replace function area_of_rectangle(lenth integer,height integer)returns integer as $$declare	area integer :&#x3D; 0;begin	area :&#x3D; lenth * height;	return area;en">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-07T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-07T09:58:57.456Z">
+<meta property="article:author" content="Kevin@TK">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Stored Procedure">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/04/08/postgresql_sp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PostgreSQL Stored Procedure | Blog Night</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Blog Night</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">有缘...来看Blog...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-electric">
+
+    <a href="/electric2/" rel="section"><i class="fa fa-plug fa-fw"></i>electric</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/about/" rel="section"><i class="fa fa-globe fa-fw"></i>link</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/08/postgresql_sp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PostgreSQL Stored Procedure
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2023-04-08T00:00:00+09:00">2023-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-04-07 18:58:57" itemprop="dateModified" datetime="2023-04-07T18:58:57+09:00">2023-04-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PostgreSQL/" itemprop="url" rel="index"><span itemprop="name">PostgreSQL</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PostgreSQL/Stored-Procedure/" itemprop="url" rel="index"><span itemprop="name">Stored Procedure</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="存储过程Sample"><a href="#存储过程Sample" class="headerlink" title="存储过程Sample"></a>存储过程Sample</h2><p>一个求长方形面积的存储过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create or replace function area_of_rectangle(lenth integer,height integer)</span><br><span class="line">returns integer as $$</span><br><span class="line">declare</span><br><span class="line">	area integer := 0;</span><br><span class="line">begin</span><br><span class="line">	area := lenth * height;</span><br><span class="line">	return area;</span><br><span class="line">end</span><br><span class="line">$$ language &#x27;plpgsql&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>※注意这里是 returns<br>调用存储过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select area_of_rectangle(10,8);</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量使用"><a href="#变量使用" class="headerlink" title="变量使用"></a>变量使用</h2><h3 id="数据类型官方参考"><a href="#数据类型官方参考" class="headerlink" title="数据类型官方参考"></a>数据类型官方参考</h3><p><a target="_blank" rel="noopener" href="http://www.postgres.cn/docs/14/datatype.html">http://www.postgres.cn/docs/14/datatype.html</a></p>
+<h3 id="record变量"><a href="#record变量" class="headerlink" title="record变量"></a>record变量</h3><p>记录类型	若存储过程需要返回多行多列记录，可以用这个<br>record类型变量是“记录类型”的变量，用于存储多行多列的值。<br>按官方文档的说明，record类型的变量并不是真正的变量，该类型变量在第一次赋值前，它有多少列、每一列是什么类型都是不确定的。在第一次赋值后，该变量就根据值自动确定列的数量和各列的类型。</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><h4 id="静态赋值："><a href="#静态赋值：" class="headerlink" title="静态赋值："></a>静态赋值：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student_name := &#x27;ABC&#x27;;</span><br></pre></td></tr></table></figure>
+<h4 id="动态赋值："><a href="#动态赋值：" class="headerlink" title="动态赋值："></a>动态赋值：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select name into student_name from class where stu_No = 1;</span><br><span class="line">--或者</span><br><span class="line">execute &#x27;select name from class where stu_No = 1&#x27; into student_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="RAISE-NOTICE"><a href="#RAISE-NOTICE" class="headerlink" title="RAISE NOTICE"></a>RAISE NOTICE</h3><p>存储过程中，使用RAISE NOTICE可以在运行时将变量输出显示，可用于查看循环执行情况等。如下语句中，单引号内为输出内容，%表示变量值，loop_count为要输出显示的变量。这种输出格式与C语言中的printf()有点像。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAISE NOTICE &#x27;---- 已执行 % 次循环&#x27;,loop_count;</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程语句"><a href="#流程语句" class="headerlink" title="流程语句"></a>流程语句</h2><h3 id="if语句："><a href="#if语句：" class="headerlink" title="if语句："></a>if语句：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF ... THEN ... END IF;</span><br><span class="line">IF ... THEN ... ELSE ... END IF;</span><br><span class="line">IF ... THEN ... ELSE IF ... THEN ... ELSE ... END IF;</span><br><span class="line">--例：</span><br><span class="line">if student_name = &#x27;张三&#x27; then</span><br><span class="line">	RAISE NOTICE &#x27;我是张三&#x27;;</span><br><span class="line">else if student_name like &#x27;%李%&#x27; then</span><br><span class="line">	RAISE NOTICE &#x27;我姓李&#x27;;</span><br><span class="line">else</span><br><span class="line">	RAISE NOTICE &#x27;我不是张三，也不姓李&#x27;;</span><br><span class="line">end if;</span><br></pre></td></tr></table></figure>
+
+<h3 id="case语句："><a href="#case语句：" class="headerlink" title="case语句："></a>case语句：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CASE ... WHEN ... THEN ... ELSE ... END CASE;</span><br><span class="line">CASE WHEN ... THEN ... ELSE ... END CASE;</span><br><span class="line">--例：</span><br><span class="line">case student_name when &#x27;张三&#x27;,&#x27;TOM&#x27; then</span><br><span class="line">	RAISE NOTICE &#x27;张三和TOM都是我的名称&#x27;;</span><br><span class="line">else </span><br><span class="line">	RAISE NOTICE &#x27;你叫错名字了&#x27;;</span><br><span class="line">end case;</span><br><span class="line">--例：</span><br><span class="line">case when student_name = &#x27;张三&#x27; or student_name = &#x27;TOM&#x27; then</span><br><span class="line">	RAISE NOTICE &#x27;张三和TOM都是我的名称&#x27;;</span><br><span class="line">else</span><br><span class="line">	RAISE NOTICE &#x27;你叫错名字了&#x27;;</span><br><span class="line">end case;</span><br></pre></td></tr></table></figure>
+
+<h3 id="loop语句："><a href="#loop语句：" class="headerlink" title="loop语句："></a>loop语句：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ &lt;&lt;label&gt;&gt; ]</span><br><span class="line">LOOP</span><br><span class="line">    循环体语句;</span><br><span class="line">    EXIT [ label ] [ WHEN 判断条件表达式 ];</span><br><span class="line">END LOOP [ label ];</span><br><span class="line"></span><br><span class="line">--例-计算1到100的和：</span><br><span class="line">sum := 0;</span><br><span class="line">i := 0;</span><br><span class="line">loop</span><br><span class="line">	i := i + 1;</span><br><span class="line">	sum := sum + i;</span><br><span class="line">	exit when i = 100 ;</span><br><span class="line">end loop;</span><br><span class="line">RAISE NOTOCE &#x27;1到100的和为：%&#x27;,sum;</span><br></pre></td></tr></table></figure>
+
+<h3 id="while语句："><a href="#while语句：" class="headerlink" title="while语句："></a>while语句：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[ &lt;&lt;label&gt;&gt; ]</span><br><span class="line">WHILE 判断条件表达式 LOOP</span><br><span class="line">    循环体语句;</span><br><span class="line">END LOOP [ label ];</span><br><span class="line"></span><br><span class="line">--例 - 计算1到100的和：</span><br><span class="line">sum := 0;</span><br><span class="line">i := 1;</span><br><span class="line">while i&lt;=100 loop</span><br><span class="line">	sum := sum + i;</span><br><span class="line">	i := i + 1;</span><br><span class="line">end loop</span><br><span class="line">RAISE NOTOCE &#x27;1到100的和为：%&#x27;,sum;</span><br></pre></td></tr></table></figure>
+
+<h3 id="for语句："><a href="#for语句：" class="headerlink" title="for语句："></a>for语句：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[ &lt;&lt;label&gt;&gt; ]</span><br><span class="line">FOR 循环控制变量 IN [ REVERSE ] 循环范围 [ BY expression ] LOOP</span><br><span class="line">    循环体语句;</span><br><span class="line">END LOOP [ label ];</span><br><span class="line"></span><br><span class="line">--计算1到100的和：</span><br><span class="line">--例1 - 循环执行过程类似于：for(i=1;i&lt;=100;i++)&#123;&#125;</span><br><span class="line">sum := 0;</span><br><span class="line">for i in 1..100 loop</span><br><span class="line">	sum := sum + i;</span><br><span class="line">end loop;</span><br><span class="line">RAISE NOTOCE &#x27;1到100的和为：%&#x27;,sum;</span><br><span class="line"></span><br><span class="line">--例2 - 循环执行过程类似于：for(i=100;i&gt;=1;i--)&#123;&#125;</span><br><span class="line">sum := 0;</span><br><span class="line">for i in REVERSE 100..1 loop</span><br><span class="line">	sum := sum + i;</span><br><span class="line">end loop;</span><br><span class="line">RAISE NOTOCE &#x27;1到100的和为：%&#x27;,sum;</span><br><span class="line"></span><br><span class="line">--计算1到100之间所有奇数的和</span><br><span class="line">--例3 - 循环执行过程类似于：for(i=1;i&lt;=100;i=i+2)&#123;&#125;</span><br><span class="line">sum := 0;</span><br><span class="line">for i in 1..100 by 2 loop</span><br><span class="line">	sum := sum + i;</span><br><span class="line">end loop;</span><br><span class="line">RAISE NOTOCE &#x27;1到100的和为：%&#x27;,sum;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[ &lt;&lt;label&gt;&gt; ]</span><br><span class="line">FOR 变量 IN 查询语句 LOOP</span><br><span class="line">    循环体语句;</span><br><span class="line">END LOOP [ label ];</span><br><span class="line"></span><br><span class="line">--例 - 遍历班级中每个人的名字：</span><br><span class="line">for student_name in select name from class loop</span><br><span class="line">	RAISE NOTICE &#x27;姓名：%&#x27;,student_name;</span><br><span class="line">end loop;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询并返回多条记录"><a href="#查询并返回多条记录" class="headerlink" title="查询并返回多条记录"></a>查询并返回多条记录</h2><h3 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create or replace function f_get_member_info(id integer)</span><br><span class="line">returns setof record as --setof是关键字，暂时不清楚其作用；record是返回的数据类型，即“记录类型”数据；</span><br><span class="line">$$--两个美元符必须存在，中间可以填入符合命名规则的字符（如$body$，$abc$），但必须与下方的两个美元符相统一</span><br><span class="line">declare</span><br><span class="line">	rec record;--定义记录类型的变量，用于存储查询的结果</span><br><span class="line">begin</span><br><span class="line">	--开始for循环，执行SELECT语句。注意，第一个loop后没有分号！</span><br><span class="line">	for rec in EXECUTE &#x27;SELECT id,real_name FROM a_account_all&#x27; loop</span><br><span class="line">		return next rec;--将查询结果依次追加到rec变量中</span><br><span class="line">	end loop;--for循环结束</span><br><span class="line">	return;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">language &#x27;plpgsql&#x27;;</span><br><span class="line"></span><br><span class="line">--调用存储过程f_get_member_info示例</span><br><span class="line">-- a_account_all 为存储过程中被查询的表，id和real_name是表中的字段，也是在存储过程中被查询的字段</span><br><span class="line">SELECT * FROM f_get_member_info(1568) as a_account_all(id integer,real_name character varying(50));</span><br></pre></td></tr></table></figure>
+<h3 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">-- FUNCTION: public.test()</span><br><span class="line"></span><br><span class="line">-- DROP FUNCTION public.test();</span><br><span class="line"></span><br><span class="line">CREATE OR REPLACE FUNCTION public.test()</span><br><span class="line">    RETURNS SETOF record </span><br><span class="line">    LANGUAGE &#x27;plpgsql&#x27;</span><br><span class="line">	</span><br><span class="line">	--这三句话我也还没搞懂其含义，但加上不会报错</span><br><span class="line">    COST 100</span><br><span class="line">    VOLATILE </span><br><span class="line">    ROWS 1000</span><br><span class="line">    </span><br><span class="line">AS $BODY$</span><br><span class="line">DECLARE</span><br><span class="line">	temp_rec record ;--第一个记录集</span><br><span class="line">	rec record ;--第二个记录集</span><br><span class="line">BEGIN</span><br><span class="line">	--给第一个结果集赋值</span><br><span class="line">	for temp_rec in execute &#x27;SELECT 1,2,3&#x27; loop</span><br><span class="line">		return next temp_rec;</span><br><span class="line">		RAISE NOTICE &#x27;temp_rec:%&#x27;,temp_rec;</span><br><span class="line">	end loop;</span><br><span class="line">	</span><br><span class="line">	--给第二个结果集赋值</span><br><span class="line">	for rec in execute &#x27;SELECT 4,5,6&#x27; loop</span><br><span class="line">		return next rec;</span><br><span class="line">		RAISE NOTICE &#x27;rec:%&#x27;,rec;</span><br><span class="line">	end loop;</span><br><span class="line">	</span><br><span class="line">	--给第二个结果集追加值</span><br><span class="line">	rec := (9,8,7);</span><br><span class="line">	return next rec;</span><br><span class="line">	</span><br><span class="line">	--将两个结果集一起返回</span><br><span class="line">	return ;</span><br><span class="line">END</span><br><span class="line">$BODY$;</span><br><span class="line"></span><br><span class="line">ALTER FUNCTION public.test()</span><br><span class="line">    OWNER TO postgres;</span><br><span class="line"></span><br><span class="line">调用示例：</span><br><span class="line">SELECT * FROM test() as temp1(num_1 integer,num_2 integer,num_3 integer);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/Stored-Procedure/" rel="tag"># Stored Procedure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/07/postgresql_comm/" rel="prev" title="PostgreSQL Ref">
+      <i class="fa fa-chevron-left"></i> PostgreSQL Ref
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8BSample"><span class="nav-number">1.</span> <span class="nav-text">存储过程Sample</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">变量使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%98%E6%96%B9%E5%8F%82%E8%80%83"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型官方参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#record%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">record变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%8B%E5%80%BC%EF%BC%9A"><span class="nav-number">2.3.1.</span> <span class="nav-text">静态赋值：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%B5%8B%E5%80%BC%EF%BC%9A"><span class="nav-number">2.3.2.</span> <span class="nav-text">动态赋值：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAISE-NOTICE"><span class="nav-number">2.4.</span> <span class="nav-text">RAISE NOTICE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">流程语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">if语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">case语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loop%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">loop语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">while语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">for语句：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%A4%9A%E6%9D%A1%E8%AE%B0%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">查询并返回多条记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">4.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B2"><span class="nav-number">4.2.</span> <span class="nav-text">例2</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kevin@TK</p>
+  <div class="site-description" itemprop="description">保持善良 希望能够帮助到更多人</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kevin@TK</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='200' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DNS 为什么同时使用 TCP 和 UDPDNS 协议 53 端口DNS 协议使用 UDP 这个问题本身其实并不完全正确，DNS 并非只使用 UDP 协议，它同时占用了 UDP 和 TCP 的 53 端口，作为单个应用层的协议，DNS 同时使用两种传输协议也属实是个另类了。 1)TCP 需要三次握手建立连接，四次挥手释放连接;UDP 不需要，面向无连接2)TCP 首部需要 20 个字节;而 UDP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NetWork">
+<meta property="og:url" content="http://example.com/2023/09/16/network/index.html">
+<meta property="og:site_name" content="Blog Night">
+<meta property="og:description" content="DNS 为什么同时使用 TCP 和 UDPDNS 协议 53 端口DNS 协议使用 UDP 这个问题本身其实并不完全正确，DNS 并非只使用 UDP 协议，它同时占用了 UDP 和 TCP 的 53 端口，作为单个应用层的协议，DNS 同时使用两种传输协议也属实是个另类了。 1)TCP 需要三次握手建立连接，四次挥手释放连接;UDP 不需要，面向无连接2)TCP 首部需要 20 个字节;而 UDP">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-16T14:11:47.000Z">
+<meta property="article:modified_time" content="2023-09-16T13:09:51.702Z">
+<meta property="article:author" content="Kevin@TK">
+<meta property="article:tag" content="Link">
+<meta property="article:tag" content="NetWork">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/16/network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>NetWork | Blog Night</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Blog Night</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">有缘...来看Blog...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/javascript/" rel="section"><i class="fa fa-feather fa-fw"></i>javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-electric">
+
+    <a href="/electric2/" rel="section"><i class="fa fa-plug fa-fw"></i>electric</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/about/" rel="section"><i class="fa fa-globe fa-fw"></i>link</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/16/network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NetWork
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-16 23:11:47 / Modified: 22:09:51" itemprop="dateCreated datePublished" datetime="2023-09-16T23:11:47+09:00">2023-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NetWork/" itemprop="url" rel="index"><span itemprop="name">NetWork</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="DNS-为什么同时使用-TCP-和-UDP"><a href="#DNS-为什么同时使用-TCP-和-UDP" class="headerlink" title="DNS 为什么同时使用 TCP 和 UDP"></a>DNS 为什么同时使用 TCP 和 UDP</h3><h4 id="DNS-协议-53-端口"><a href="#DNS-协议-53-端口" class="headerlink" title="DNS 协议 53 端口"></a>DNS 协议 53 端口</h4><p>DNS 协议使用 UDP 这个问题本身其实并不完全正确，DNS 并非只使用 UDP 协议，它同时占用了 UDP 和 TCP 的 53 端口，作为单个应用层的协议，DNS 同时使用两种传输协议也属实是个另类了。</p>
+<p>1)TCP 需要三次握手建立连接，四次挥手释放连接;UDP 不需要，面向无连接<br>2)TCP 首部需要 20 个字节;而 UDP 首部只有 8 个字节<br>3)TCP 具有一系列保证可靠传输的机制;而 UDP 尽最大努力交付，不提供可靠传输的机制，如果在数据传输的过程中出现部分数据的丢失，UDP 协议本身并不能做出任何检测或补救措施<br>4)正是由于 UDP 没有了可靠传输机制，所以速度远远快于 TCP，在某些情况下 UDP 是一种最有效的工作方式，一般用于即时通信，比如：语音电话、 直播等等;而 TCP 一般用于文件传输、发送和接收邮件、远程登录等准确性要求比较高的场景<br>上面这些是最基本的吧。<br>接下来讲的这个点，也就是很多人容易忽略的点，和 DNS 为什么需要同时使用 UDP 和 TCP 这个问题息息相关：<br>那就是 TCP 是面向字节流的，而 UDP 是面向报文的<br>解释一下这句话，我们知道，TCP 具有序列号机制，发送方会把一个大的 HTTP 报文按序号分割成若干报文段并加上 TCP 首部，也就是封装成 TCP 报文段。那么接收方在收到这些 TCP 报文段后，就会按照序号以原来的顺序重组 HTTP 报文。这就是面向字节流的 TCP。<br>而所谓 UDP 面向报文，发送方的 UDP 对应用层交付下来的 HTTP 报文， 在添加 UDP 首部后也就是封装成 UDP 报文，就向下交付给网络层 IP 协议。不做任何的拆分与合并，主要就是因为 UDP 没有像 TCP 一样的序列号机制来标识报文，所以默认只有一个 UDP 报文。<br>UDP 这么做就会导致一个问题。<br>互联网上物理链路的最小传输单元 &#x3D; 576 字节，为了在物理链路上顺利传输，UDP 报文不能超过 576 字节，为此，UDP 报文被限制在 512 字节以内。<br>而 DNS 由于大面积使用了 UDP，这样一旦 DNS 报文超过 512 字节，基于 UDP 的 DNS 报文就只有抛弃多出来的 64 字节，截短为 512 字节，那么用户得到的 DNS 报文就是不完整的。<br>如何解决这个问题呢?<br>没错，最简单的方式就是使用 TCP。尽管速度可能相之 UDP 较慢，但对于得到完整的 DNS 报文，速度慢一点也可以忍受。</p>
+<h4 id="DNS-分别在什么情况下使用-UDP-和-TCP"><a href="#DNS-分别在什么情况下使用-UDP-和-TCP" class="headerlink" title="DNS 分别在什么情况下使用 UDP 和 TCP"></a>DNS 分别在什么情况下使用 UDP 和 TCP</h4><p>了解了 TCP 面向字节流而 UDP 面向报文的这个特性之后，在域名解析的时候，也就是客户端向 DNS 服务器查询域名获取 IP 地址的时候，DNS 协议关于 UDP 和 TCP 的选择通常可以分为以下两种情况：<br>1)若客户端事先知道 DNS 响应报文的长度会大于 512 字节，则应当直接使用 TCP 建立连接<br>2)若客户端事先不知道 DNS 响应报文的长度，一般会先使用 UDP 协议发送 DNS 查询报文，若 DNS 服务器发现 DNS 响应报文的长度大于 512 字节，则多出来的部分会被 UDP 抛弃(截断 TrunCation)，那么服务器会把这个部分被抛弃的 DNS 报文首部中的 TC 标志位置为 1，以通知客户端该 DNS 报文已经被截断。客户端收到之后会重新发起一次 TCP 请求，从而使得它将来能够从 DNS 服务器收到完整的响应报文。<br>当然了，在域名解析的时候，一般返回的 DNS 响应报文都不会超过 512 字节，用 UDP 传输即可。事实上，很多 DNS 服务器进行配置的时候，也仅支持 UDP 查询包。<br>不过，DNS 不仅存在域名解析的过程，还有区域传输的过程，而在进行区域传输的时候 DNS 会强制使用 TCP 协议。</p>
+<h4 id="什么是区域传输"><a href="#什么是区域传输" class="headerlink" title="什么是区域传输?"></a>什么是区域传输?</h4><p>这就不得不提一下主域名服务器和辅助域名服务器。<br>设置域名服务器时，服务器管理员可以选择将域名服务器指定为主服务器还是辅助服务器(也称为从服务器)。<br>主域名服务器负责维护一个区域的所有域名信息，是特定的所有信息的权威信息源，数据可以修改。主服务器直接从本地文件获取此信息。只能在主服务器上更改区域的 DNS 记录，然后主服务器才能更新辅助服务器。<br>当主域名服务器出现故障、关闭或负载过重时，辅助域名服务器作为主域名服务器的备份提供域名解析服务。辅助域名服务器中的区域文件中的数据是从主域名服务器中复制过来的，无法自行修改。<br>其实就是主从的概念，各位应该也都比较熟悉了。主域名服务器用来写，辅助域名服务器用来读，提供负载均衡的能力，缓解主域名服务器的压力。<br>那么所谓区域传输(zone transfer)呢，就是辅助域名服务器与主域名服务器通信，并同步数据信息的过程。<br>辅域名服务器会定时向主域名服务器进行查询以便了解数据是否有变动。如有变动，则会执行一次区域传输。区域传输使用 TCP 而不是 UDP，因为数据同步传送的数据量比一个 DNS 请求和响应报文的数据量要多得多。<br>文章开头提到的既然 UDP 更快，为什么 HTTP 不使用 UDP 呢?这个问题的答案也大抵如此。<br>由于互联网的不安全性，我们需要数字证书并携带数字签名来保证数据的安全性，为此，整个 HTTP 报文的大小已经远远超过 512 字节，无法使用 UDP 传输。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>DNS 在域名解析的过程中，会根据 DNS 响应报文的大小选择使用 TCP 还是 UDP。但是一般情况下，返回的 DNS 响应报文都不会超过 512 字节，所以事实上，很多 DNS 服务器进行配置的时候，也仅支持 UDP 查询包;<br>DNS 在进行区域传输的时候使用 TCP 协议。</p>
+<h3 id="NTP的工作原理以及工作模式"><a href="#NTP的工作原理以及工作模式" class="headerlink" title="NTP的工作原理以及工作模式"></a>NTP的工作原理以及工作模式</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106069365">https://zhuanlan.zhihu.com/p/106069365</a><br>NTP（Network Time Protocol，网络时间协议）是由RFC 1305定义的时间同步协议，用来在分布式时间服务器和客户端之间进行时间同步。NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于运行NTP的本地系统，既可以接收来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Link/" rel="tag"># Link</a>
+              <a href="/tags/NetWork/" rel="tag"># NetWork</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/06/bootstrap5/" rel="prev" title="BootStrap5">
+      <i class="fa fa-chevron-left"></i> BootStrap5
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/16/mcbi/" rel="next" title="mcbi">
+      mcbi <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8-TCP-%E5%92%8C-UDP"><span class="nav-number">1.</span> <span class="nav-text">DNS 为什么同时使用 TCP 和 UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-%E5%8D%8F%E8%AE%AE-53-%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.</span> <span class="nav-text">DNS 协议 53 端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-%E5%88%86%E5%88%AB%E5%9C%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BD%BF%E7%94%A8-UDP-%E5%92%8C-TCP"><span class="nav-number">1.2.</span> <span class="nav-text">DNS 分别在什么情况下使用 UDP 和 TCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9F%9F%E4%BC%A0%E8%BE%93"><span class="nav-number">1.3.</span> <span class="nav-text">什么是区域传输?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NTP%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">NTP的工作原理以及工作模式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kevin@TK"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Kevin@TK</p>
+  <div class="site-description" itemprop="description">保持善良 希望能够帮助到更多人</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kevin@TK</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='200' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

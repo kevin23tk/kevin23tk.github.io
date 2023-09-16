@@ -179,6 +179,154 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/16/mcbi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/16/mcbi/" class="post-title-link" itemprop="url">mcbi</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-16 23:11:47 / Modified: 22:29:05" itemprop="dateCreated datePublished" datetime="2023-09-16T23:11:47+09:00">2023-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mcbi/" itemprop="url" rel="index"><span itemprop="name">mcbi</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/16/mcbi/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/16/network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/16/network/" class="post-title-link" itemprop="url">NetWork</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-16 23:11:47 / Modified: 22:09:51" itemprop="dateCreated datePublished" datetime="2023-09-16T23:11:47+09:00">2023-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NetWork/" itemprop="url" rel="index"><span itemprop="name">NetWork</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="DNS-为什么同时使用-TCP-和-UDP"><a href="#DNS-为什么同时使用-TCP-和-UDP" class="headerlink" title="DNS 为什么同时使用 TCP 和 UDP"></a>DNS 为什么同时使用 TCP 和 UDP</h3><h4 id="DNS-协议-53-端口"><a href="#DNS-协议-53-端口" class="headerlink" title="DNS 协议 53 端口"></a>DNS 协议 53 端口</h4><p>DNS 协议使用 UDP 这个问题本身其实并不完全正确，DNS 并非只使用 UDP 协议，它同时占用了 UDP 和 TCP 的 53 端口，作为单个应用层的协议，DNS 同时使用两种传输协议也属实是个另类了。</p>
+<p>1)TCP 需要三次握手建立连接，四次挥手释放连接;UDP 不需要，面向无连接<br>2)TCP 首部需要 20 个字节;而 UDP 首部只有 8 个字节<br>3)TCP 具有一系列保证可靠传输的机制;而 UDP 尽最大努力交付，不提供可靠传输的机制，如果在数据传输的过程中出现部分数据的丢失，UDP 协议本身并不能做出任何检测或补救措施<br>4)正是由于 UDP 没有了可靠传输机制，所以速度远远快于 TCP，在某些情况下 UDP 是一种最有效的工作方式，一般用于即时通信，比如：语音电话、 直播等等;而 TCP 一般用于文件传输、发送和接收邮件、远程登录等准确性要求比较高的场景<br>上面这些是最基本的吧。<br>接下来讲的这个点，也就是很多人容易忽略的点，和 DNS 为什么需要同时使用 UDP 和 TCP 这个问题息息相关：<br>那就是 TCP 是面向字节流的，而 UDP 是面向报文的<br>解释一下这句话，我们知道，TCP 具有序列号机制，发送方会把一个大的 HTTP 报文按序号分割成若干报文段并加上 TCP 首部，也就是封装成 TCP 报文段。那么接收方在收到这些 TCP 报文段后，就会按照序号以原来的顺序重组 HTTP 报文。这就是面向字节流的 TCP。<br>而所谓 UDP 面向报文，发送方的 UDP 对应用层交付下来的 HTTP 报文， 在添加 UDP 首部后也就是封装成 UDP 报文，就向下交付给网络层 IP 协议。不做任何的拆分与合并，主要就是因为 UDP 没有像 TCP 一样的序列号机制来标识报文，所以默认只有一个 UDP 报文。<br>UDP 这么做就会导致一个问题。<br>互联网上物理链路的最小传输单元 &#x3D; 576 字节，为了在物理链路上顺利传输，UDP 报文不能超过 576 字节，为此，UDP 报文被限制在 512 字节以内。<br>而 DNS 由于大面积使用了 UDP，这样一旦 DNS 报文超过 512 字节，基于 UDP 的 DNS 报文就只有抛弃多出来的 64 字节，截短为 512 字节，那么用户得到的 DNS 报文就是不完整的。<br>如何解决这个问题呢?<br>没错，最简单的方式就是使用 TCP。尽管速度可能相之 UDP 较慢，但对于得到完整的 DNS 报文，速度慢一点也可以忍受。</p>
+<h4 id="DNS-分别在什么情况下使用-UDP-和-TCP"><a href="#DNS-分别在什么情况下使用-UDP-和-TCP" class="headerlink" title="DNS 分别在什么情况下使用 UDP 和 TCP"></a>DNS 分别在什么情况下使用 UDP 和 TCP</h4><p>了解了 TCP 面向字节流而 UDP 面向报文的这个特性之后，在域名解析的时候，也就是客户端向 DNS 服务器查询域名获取 IP 地址的时候，DNS 协议关于 UDP 和 TCP 的选择通常可以分为以下两种情况：<br>1)若客户端事先知道 DNS 响应报文的长度会大于 512 字节，则应当直接使用 TCP 建立连接<br>2)若客户端事先不知道 DNS 响应报文的长度，一般会先使用 UDP 协议发送 DNS 查询报文，若 DNS 服务器发现 DNS 响应报文的长度大于 512 字节，则多出来的部分会被 UDP 抛弃(截断 TrunCation)，那么服务器会把这个部分被抛弃的 DNS 报文首部中的 TC 标志位置为 1，以通知客户端该 DNS 报文已经被截断。客户端收到之后会重新发起一次 TCP 请求，从而使得它将来能够从 DNS 服务器收到完整的响应报文。<br>当然了，在域名解析的时候，一般返回的 DNS 响应报文都不会超过 512 字节，用 UDP 传输即可。事实上，很多 DNS 服务器进行配置的时候，也仅支持 UDP 查询包。<br>不过，DNS 不仅存在域名解析的过程，还有区域传输的过程，而在进行区域传输的时候 DNS 会强制使用 TCP 协议。</p>
+<h4 id="什么是区域传输"><a href="#什么是区域传输" class="headerlink" title="什么是区域传输?"></a>什么是区域传输?</h4><p>这就不得不提一下主域名服务器和辅助域名服务器。<br>设置域名服务器时，服务器管理员可以选择将域名服务器指定为主服务器还是辅助服务器(也称为从服务器)。<br>主域名服务器负责维护一个区域的所有域名信息，是特定的所有信息的权威信息源，数据可以修改。主服务器直接从本地文件获取此信息。只能在主服务器上更改区域的 DNS 记录，然后主服务器才能更新辅助服务器。<br>当主域名服务器出现故障、关闭或负载过重时，辅助域名服务器作为主域名服务器的备份提供域名解析服务。辅助域名服务器中的区域文件中的数据是从主域名服务器中复制过来的，无法自行修改。<br>其实就是主从的概念，各位应该也都比较熟悉了。主域名服务器用来写，辅助域名服务器用来读，提供负载均衡的能力，缓解主域名服务器的压力。<br>那么所谓区域传输(zone transfer)呢，就是辅助域名服务器与主域名服务器通信，并同步数据信息的过程。<br>辅域名服务器会定时向主域名服务器进行查询以便了解数据是否有变动。如有变动，则会执行一次区域传输。区域传输使用 TCP 而不是 UDP，因为数据同步传送的数据量比一个 DNS 请求和响应报文的数据量要多得多。<br>文章开头提到的既然 UDP 更快，为什么 HTTP 不使用 UDP 呢?这个问题的答案也大抵如此。<br>由于互联网的不安全性，我们需要数字证书并携带数字签名来保证数据的安全性，为此，整个 HTTP 报文的大小已经远远超过 512 字节，无法使用 UDP 传输。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>DNS 在域名解析的过程中，会根据 DNS 响应报文的大小选择使用 TCP 还是 UDP。但是一般情况下，返回的 DNS 响应报文都不会超过 512 字节，所以事实上，很多 DNS 服务器进行配置的时候，也仅支持 UDP 查询包;<br>DNS 在进行区域传输的时候使用 TCP 协议。</p>
+<h3 id="NTP的工作原理以及工作模式"><a href="#NTP的工作原理以及工作模式" class="headerlink" title="NTP的工作原理以及工作模式"></a>NTP的工作原理以及工作模式</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106069365">https://zhuanlan.zhihu.com/p/106069365</a><br>NTP（Network Time Protocol，网络时间协议）是由RFC 1305定义的时间同步协议，用来在分布式时间服务器和客户端之间进行时间同步。NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于运行NTP的本地系统，既可以接收来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/06/bootstrap5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -210,7 +358,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-13 03:01:05" itemprop="dateModified" datetime="2023-07-13T03:01:05+09:00">2023-07-13</time>
+                <time title="Modified: 2023-09-16 22:05:06" itemprop="dateModified" datetime="2023-09-16T22:05:06+09:00">2023-09-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +381,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="BootStrap5"><a href="#BootStrap5" class="headerlink" title="BootStrap5"></a>BootStrap5</h4><p>★边距<br><a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/utilities/spacing/">https://getbootstrap.com/docs/5.0/utilities/spacing/</a></p>
+          <h4 id="BootStrap5"><a href="#BootStrap5" class="headerlink" title="BootStrap5"></a>BootStrap5</h4><p>学习<br><a target="_blank" rel="noopener" href="https://www.runoob.com/">https://www.runoob.com/</a></p>
+<p>★边距<br><a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/utilities/spacing/">https://getbootstrap.com/docs/5.0/utilities/spacing/</a></p>
 <p>★sm, md, lg, xl, and xxl<br><a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/layout/grid/">https://getbootstrap.com/docs/5.0/layout/grid/</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;card mx-1 mx-sm-5 mt-2&quot;&gt;</span><br></pre></td></tr></table></figure>
 <p>mx-1    设置基本 mx margin 1 (手机宽度时候 边距也是1)<br>mx-sm-5 大于sm的时候 mx margin 5 (大于手机宽度时候 边距是5)<br>mt-2    margin top 2</p>
@@ -818,195 +967,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/20/git_comm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kevin@TK">
-      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog Night">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/20/git_comm/" class="post-title-link" itemprop="url">使用 git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-20 01:35:16" itemprop="dateCreated datePublished" datetime="2023-03-20T01:35:16+09:00">2023-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-07 17:34:36" itemprop="dateModified" datetime="2023-04-07T17:34:36+09:00">2023-04-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><h2 id="查看-git-版本"><a href="#查看-git-版本" class="headerlink" title="查看 git 版本"></a>查看 git 版本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git --version</span><br><span class="line">git version 2.21.0.windows.1</span><br></pre></td></tr></table></figure>
-<h2 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h2><p>Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。<br>这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：</p>
-<ul>
-<li>&#x2F;etc&#x2F;gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 git config 时用 –system 选项，读写的就是这个文件。</li>
-<li>~&#x2F;.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 git config 时用 –global 选项，读写的就是这个文件。</li>
-<li>当前项目的 Git 目录中的配置文件（也就是工作目录中的 .git&#x2F;config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git&#x2F;config 里的配置会覆盖 &#x2F;etc&#x2F;gitconfig 中的同名变量。</li>
-</ul>
-<p>在 Windows 系统上，Git 会找寻用户主目录下的 .gitconfig 文件。主目录即 $HOME 变量指定的目录，一般都是 C:\Documents and Settings$USER。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git config --global user.name &quot;runoob&quot;</span><br><span class="line">cmd&gt; git config --global user.email test@runoob.com</span><br></pre></td></tr></table></figure>
-<p>.gitconfig 文件内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">	helper = wincred</span><br><span class="line">[user]</span><br><span class="line">	name = test</span><br><span class="line">	email = test@aaaa.com</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cmd&gt; git config --list</span><br><span class="line">core.symlinks=false</span><br><span class="line">core.autocrlf=true</span><br><span class="line">core.fscache=true</span><br><span class="line">color.diff=auto</span><br><span class="line">color.status=auto</span><br><span class="line">color.branch=auto</span><br><span class="line">color.interactive=true</span><br><span class="line">help.format=html</span><br><span class="line">rebase.autosquash=true</span><br><span class="line">http.sslbackend=openssl</span><br><span class="line">http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt</span><br><span class="line">credential.helper=manager</span><br><span class="line">credential.helper=wincred</span><br><span class="line">user.name=test</span><br><span class="line">user.email=test@aaaa.com</span><br></pre></td></tr></table></figure>
-<h2 id="Git-基本操作"><a href="#Git-基本操作" class="headerlink" title="Git 基本操作"></a>Git 基本操作</h2><p>将github上的库，下载到本地工作目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\gitworksp&gt;git clone https://YourToken@github.com/XXXXXX/testdoc.git</span><br></pre></td></tr></table></figure>
-<p>git init - 初始化仓库。<br>git add . - 添加文件到暂存区。<br>git commit - 将暂存区内容添加到仓库中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">一般加msg commit</span><br><span class="line">git commit -m &#x27;注释msg&#x27;</span><br><span class="line"></span><br><span class="line">如果懒得什么message都不想写！那用--allow-empty-message就可以</span><br><span class="line">git commit --allow-empty-message</span><br><span class="line">用--no-edit不会弹出编辑器</span><br><span class="line">git commit --allow-empty-message --no-edit</span><br><span class="line">4 files changed, 4 insertions(+)</span><br><span class="line"> create mode 100644 aa/bb/doc3.txt</span><br><span class="line"> create mode 100644 aa/bb/doc4.txt</span><br><span class="line"> create mode 100644 aa/doc1.txt</span><br><span class="line"> create mode 100644 aa/doc2.txt</span><br></pre></td></tr></table></figure>
-<p>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;<br>如果本地分支名与远程分支名相同，则可以省略冒号：<br>git push &lt;远程主机名&gt; &lt;本地分支名&gt;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git push https://YourToken@github.com/XXXXXX/testdoc.git main</span><br><span class="line">Enumerating objects: 9, done.</span><br><span class="line">Counting objects: 100% (9/9), done.</span><br><span class="line">Delta compression using up to 4 threads</span><br><span class="line">Compressing objects: 100% (4/4), done.</span><br><span class="line">Writing objects: 100% (8/8), 480 bytes | 240.00 KiB/s, done.</span><br><span class="line">Total 8 (delta 0), reused 0 (delta 0), pack-reused 0</span><br><span class="line">To https://github.com/kevin23tk/testdoc.git</span><br><span class="line">   dcfbeae..90ecca4  main -&gt; main</span><br></pre></td></tr></table></figure>
-
-<h2 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h2><p>通过branch命令来创建分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;git branch &lt;branchname&gt;</span><br><span class="line"></span><br><span class="line">创建名为issue1的分支</span><br><span class="line">&gt;git branch issue1</span><br></pre></td></tr></table></figure>
-<p>列出当前Branch</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;git branch</span><br><span class="line">* main</span><br><span class="line">&gt;git branch bch01</span><br><span class="line">&gt;git branch</span><br><span class="line">  bch01</span><br><span class="line">* main</span><br></pre></td></tr></table></figure>
-<p>新建Branch bch01<br>*所在的是当前处理的branch</p>
-<p>新建文件 bch01.txt<br>修改文件 doc2.txt</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bch01.txt</span><br><span class="line">Branch01 new</span><br><span class="line"></span><br><span class="line">doc2.txt</span><br><span class="line">BBBBB1</span><br><span class="line">Branch01 Modify</span><br></pre></td></tr></table></figure>
-
-<p>将修改Commit到main</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;git add .</span><br><span class="line">&gt;git commit --allow-empty-message --no-edit</span><br><span class="line">[main 3adb496]</span><br><span class="line"> 2 files changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 aa/bch01.txt</span><br></pre></td></tr></table></figure>
-
-<p>切换branch到bch01<br>会发现目录中的文件回复到刚建立Branch的时候</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;git checkout bch01</span><br><span class="line">Switched to branch &#x27;bch01&#x27;</span><br><span class="line">&gt;git branch</span><br><span class="line">* bch01</span><br><span class="line">  main</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Git-命令-HELP"><a href="#Git-命令-HELP" class="headerlink" title="Git 命令 HELP"></a>Git 命令 HELP</h2><p>安装完git后本地有HELP文档<br>file:&#x2F;&#x2F;&#x2F;C:&#x2F;Program%20Files&#x2F;Git&#x2F;mingw64&#x2F;share&#x2F;doc&#x2F;git-doc&#x2F;</p>
-<p>Git 里面的 origin 到底代表啥意思<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27712995">https://www.zhihu.com/question/27712995</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/html_comm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kevin@TK">
-      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog Night">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/17/html_comm/" class="post-title-link" itemprop="url">HTML 知识点</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-03-17 01:35:16 / Modified: 02:13:28" itemprop="dateCreated datePublished" datetime="2023-03-17T01:35:16+09:00">2023-03-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="HTML、XML、XHTML-区别"><a href="#HTML、XML、XHTML-区别" class="headerlink" title="HTML、XML、XHTML 区别"></a>HTML、XML、XHTML 区别</h2><h3 id="HTML-超文本标记语言（HyperText-Markup-Language，简称：HTML）"><a href="#HTML-超文本标记语言（HyperText-Markup-Language，简称：HTML）" class="headerlink" title="HTML 超文本标记语言（HyperText Markup Language，简称：HTML）"></a>HTML 超文本标记语言（HyperText Markup Language，简称：HTML）</h3><p>超文本标记语言（第一版）——在1993年6月作为互联网工程工作小组（IETF）工作草案发布（* 并非标准）：<br>HTML 2.0——1995年11月作为RFC 1866发布，在RFC 2854于2000年6月发布之后被宣布已经过时<br>HTML 3.2——1997年1月14日，W3C推荐标准<br>HTML 4.0——1997年12月18日，W3C推荐标准<br>HTML 4.01（微小改进）——1999年12月24日，W3C推荐标准<br>HTML 5——2014年10月28日，W3C推荐标准 </p>
-<h3 id="XML-可扩展标记语言（Extensible-Markup-Language-，简称：XML）"><a href="#XML-可扩展标记语言（Extensible-Markup-Language-，简称：XML）" class="headerlink" title="XML 可扩展标记语言（Extensible Markup Language ，简称：XML）"></a>XML 可扩展标记语言（Extensible Markup Language ，简称：XML）</h3><p>XML被设计用来传输和存储数据，其焦点是数据的内容。<br>超文本标记语言被设计用来显示数据，其焦点是数据的外观。<br>XML 于 1998 年 2 月 10 日成为 W3C 的推荐标准。<br>XML 是各种应用程序之间进行数据传输的最常用的工具。</p>
-<h3 id="XHTML-指扩展超文本标签语言（EXtensible-HyperText-Markup-Language）"><a href="#XHTML-指扩展超文本标签语言（EXtensible-HyperText-Markup-Language）" class="headerlink" title="XHTML 指扩展超文本标签语言（EXtensible HyperText Markup Language）"></a>XHTML 指扩展超文本标签语言（EXtensible HyperText Markup Language）</h3><p>XHTML 的目标是取代 HTML。<br>XHTML 与 HTML 4.01 几乎是相同的。<br>XHTML 是更严格更纯净的 HTML 版本。<br>XHTML 是作为一种 XML 应用被重新定义的 HTML。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>在 XHTML 中，xmlns 属性是必需的。在 HTML 中，xmlns 属性是无效的。<br>xmlns 属性规定文档的 xml 命名空间。<br>然而，如果在 XHTML 文档中未使用 xmlns， <a target="_blank" rel="noopener" href="http://w3.org/">http://w3.org</a> 的 HTML 验证器也能正确识别文档。这是因为命名空间 “xmlns&#x3D;<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>“ 是默认的，会自动添加到 <html> 标签。</p>
-<h2 id="HTML-lang-語言指定"><a href="#HTML-lang-語言指定" class="headerlink" title="HTML lang - 語言指定"></a>HTML lang - 語言指定</h2><p>应该在 <html> 标记内包含 lang 属性，以声明网页的语言。 这是为了帮助搜索引擎和浏览器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang=&quot;ja&quot;&gt;</span><br><span class="line">&lt;html lang=&quot;zh&quot;&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>参考链接:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://www.w3schools.com/tags/ref_language_codes.asp</span><br><span class="line">https://tools.ietf.org/html/bcp47</span><br><span class="line">http://www.iana.org/protocols</span><br></pre></td></tr></table></figure>
-<h2 id="什么是-DOCTYPE-HTML"><a href="#什么是-DOCTYPE-HTML" class="headerlink" title="什么是 !DOCTYPE HTML"></a>什么是 !DOCTYPE HTML</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br></pre></td></tr></table></figure>
-<p>声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。<br>document.compatMode：<br>BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。<br>CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。<br>这个属性会被浏览器识别并使用，但是如果你的页面没有DOCTYPE的声明，那么compatMode默认就是BackCompat,<br>这也就是恶魔的开始 – 浏览器按照自己的方式解析渲染页面，那么，在不同的浏览器就会显示不同的样式。<br>如果你的页面添加了＜!DOCTYPE html＞那么，那么就等同于开启了标准模式，那么浏览器就得老老实实的按照W3C的<br>标准解析渲染页面，这样一来，你的页面在所有的浏览器里显示的就都是一个样子了。<br>这就是＜!DOCTYPE html＞的作用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1078,20 +1038,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

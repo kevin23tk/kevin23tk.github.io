@@ -179,6 +179,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/22/js_browser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin@TK">
+      <meta itemprop="description" content="保持善良 希望能够帮助到更多人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog Night">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/22/js_browser/" class="post-title-link" itemprop="url">Javascript Browser 控制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-22 01:24:16" itemprop="dateCreated datePublished" datetime="2023-03-22T01:24:16+09:00">2023-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-26 02:24:03" itemprop="dateModified" datetime="2023-03-26T02:24:03+09:00">2023-03-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="获取选项卡的-ID"><a href="#获取选项卡的-ID" class="headerlink" title="获取选项卡的 ID"></a>获取选项卡的 ID</h2><h4 id="在-Chrome-中，可以使用-chrome-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID："><a href="#在-Chrome-中，可以使用-chrome-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID：" class="headerlink" title="在 Chrome 中，可以使用 chrome.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID："></a>在 Chrome 中，可以使用 chrome.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chrome.tabs.query(&#123; active: true, currentWindow: true &#125;, function(tabs) &#123;</span><br><span class="line">  var tabId = tabs[0].id;</span><br><span class="line">  console.log(&quot;当前选项卡的ID是：&quot; + tabId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="在-Firefox-中，可以使用-browser-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID"><a href="#在-Firefox-中，可以使用-browser-tabs-API-来获取选项卡的-ID。例如，可以使用以下代码获取当前活动选项卡的-ID" class="headerlink" title="在 Firefox 中，可以使用 browser.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID:"></a>在 Firefox 中，可以使用 browser.tabs API 来获取选项卡的 ID。例如，可以使用以下代码获取当前活动选项卡的 ID:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">browser.tabs.query(&#123; active: true, currentWindow: true &#125;).then(function(tabs) &#123;</span><br><span class="line">  var tabId = tabs[0].id;</span><br><span class="line">  console.log(&quot;当前选项卡的ID是：&quot; + tabId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/20/git_comm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -747,20 +821,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
